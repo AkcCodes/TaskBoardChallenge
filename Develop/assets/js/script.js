@@ -1,3 +1,22 @@
+const modal = document.getElementById("formModal");
+const btn = document.getElementsByClassName("btn btn-success");
+const span = document.getElementsByClassName("close");
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+span.onclick = function(){
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if(event.target==modal){
+        modal.style.display = "none";
+    }
+}
+
+
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
