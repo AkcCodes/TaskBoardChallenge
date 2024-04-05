@@ -4,6 +4,7 @@ const submit = document.getElementById("submit")
 const taskNameInputEl = $('#taskTitle');
 const taskTypeInputEl = $('#taskDescription');
 const taskDateInputEl = $('#dueDate');
+const taskDisplayEl = $('#todo-cards');
 const taskList = JSON.parse(localStorage.getItem('tasks'));
 
 
@@ -58,19 +59,8 @@ function createTaskCard(task) {
   const cardContainer = document.getElementById('todo-cards');
   cardContainer.appendChild(card);
 }
-if (task.dueDate && task.status !== 'done') {
-    const now = dayjs();
-    const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
 
-    
-    if (now.isSame(taskDueDate, 'day')) {
-      taskCard.addClass('bg-warning text-white');
-    } else if (now.isAfter(taskDueDate)) {
-      taskCard.addClass('bg-danger text-white');
-      cardDeleteBtn.addClass('border-light');
-    }
 
-}
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
@@ -157,9 +147,9 @@ function handleDrop(event, ui) {
   printProjectData();
 }
 
-projectFormEl.on('submit', handleProjectFormSubmit);
+modal.on('submit', handleAddTask);
 
-projectDisplayEl.on('click', '.btn-delete-task', handleDeleteProject);
+taskDisplayEl.on('click', '.btn-delete-task', handleDeleteTask);
 
 displayTime();
 setInterval(displayTime, 1000);
